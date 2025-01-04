@@ -183,4 +183,10 @@ CREATE TABLE `virtualWallet` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb3;
 
+-- add a foreign key
+alter table virtualWallet
+    add constraint virtualWallet_user_userId_fk
+        foreign key (userId) references user (userId);
+
+
 SET FOREIGN_KEY_CHECKS = 1;
