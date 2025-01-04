@@ -31,7 +31,7 @@ CREATE TABLE `merchant` (
   `starPrice` decimal(5,2) DEFAULT '0.00' COMMENT '起送费',
   `deliveryPrice` decimal(5,2) DEFAULT '0.00' COMMENT '配送费',
   `remarks` varchar(40) DEFAULT NULL COMMENT '备注',
-  `views` int(10) unsigned zerofill DEFAULT NULL,
+  `views` int(10) unsigned zerofill DEFAULT NULL COMMENT 'no use' ,
   `orderQuantity` int DEFAULT NULL,
   `isDelete` tinyint NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`merchantId`)
@@ -50,6 +50,14 @@ CREATE TABLE `cart` (
   `isDelete` tinyint NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`cartId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=utf8mb3;
+alter table cart
+    add constraint cart_user_userId_fk
+        foreign key (userId) references user (userId);
+;
+
+
+
+
 
 -- ----------------------------
 -- Table structure for deliveryaddress
@@ -65,6 +73,11 @@ CREATE TABLE `deliveryaddress` (
   `isDelete` tinyint NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`daId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3;
+alter table deliveryaddress
+    add constraint deliveryaddress_user_userId_fk
+        foreign key (userId) references user (userId);
+
+
 
 -- ----------------------------
 -- Table structure for food
@@ -111,6 +124,11 @@ CREATE TABLE `orders` (
   `isDelete` tinyint NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`orderId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb3;
+alter table orders
+    add constraint orders_user_userId_fk
+        foreign key (userId) references user (userId);
+
+
 
 -- ----------------------------
 -- Table structure for point
