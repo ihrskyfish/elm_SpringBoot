@@ -77,17 +77,21 @@ public class UserController {
         String password = user.getPassword();
         String userName = user.getUserName();
         Integer userSex = user.getUserSex();
-        if (StringUtils.isAnyBlank(userId, password, userName) || password == null) {
-            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
-        }
-        if (password.length() < 6) {
-            throw new MerchantException(ErrorCode.PARAMS_ERROR, "密码长度过短，应大于6位");
-        }
+        validateUser(userId, password, userName);
         Integer result = userService.saveUser(userId, password, userName, userSex);
         if (result.equals(1)) {
             return ResultUtils.success(result);
         } else {
             throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，新增用户失败");
+        }
+    }
+
+    private static void validateUser(String userId, String password, String userName) {
+        if (StringUtils.isAnyBlank(userId, password, userName) || password == null) {
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+        }
+        if (password.length() < 6) {
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "密码长度过短，应大于6位");
         }
     }
 
