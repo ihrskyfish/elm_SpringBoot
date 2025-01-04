@@ -5,22 +5,22 @@
     <resultMap type="Cart" id="cartResultMap">
         <id column="cartId" property="cartId"/>
         <result column="foodId" property="foodId"/>
-        <result column="businessId" property="businessId"/>
+        <result column="merchantId" property="merchantId"/>
         <result column="userId" property="userId"/>
         <result column="quantity" property="quantity"/>
         <association property="food" javaType="Food"
                      select="com.elm.mapper.FoodMapper.getFoodById" column="foodId"/>
-        <association property="merchant" javaType="Business"
-                     select="com.elm.mapper.MerchantMapper.getBusinessById"
-                     column="businessId"/>
+        <association property="merchant" javaType="Merchant"
+                     select="com.elm.mapper.MerchantMapper.getMerchantById"
+                     column="merchantId"/>
 
     </resultMap>
     <select id="listCart" parameterType="Cart" resultMap="cartResultMap">
         select * from cart
         <where>
             userId=#{userId}
-            <if test="businessId!=null and businessId!=''">
-                and businessId=#{businessId}
+            <if test="merchantId!=null and merchantId!=''">
+                and merchantId=#{merchantId}
 
             </if>
         </where>
@@ -30,7 +30,7 @@
     <delete id="removeCart" parameterType="Cart">
         delete from cart
         <where>
-            userId=#{userId} and businessId=#{businessId}
+            userId=#{userId} and merchantId=#{merchantId}
             <if test="foodId!=null and foodId!=''">
                 and foodId=#{foodId}
             </if>
