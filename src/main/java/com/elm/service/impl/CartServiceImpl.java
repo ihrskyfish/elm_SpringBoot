@@ -21,8 +21,8 @@ public class CartServiceImpl implements CartService {
     private CartMapper cartMapper;
 
     @Override
-    public List<CartVo> listCart(String userId, Integer businessId) {
-        List<Cart> cartList = cartMapper.listCart(userId, businessId);
+    public List<CartVo> listCart(String userId, Integer merchantId) {
+        List<Cart> cartList = cartMapper.listCart(userId, merchantId);
         return getCartVo(cartList);
     }
 

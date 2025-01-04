@@ -22,7 +22,7 @@ public class MerchantController {
     private MerchantService merchantService;
 
     @GetMapping("/lists/{orderTypeId}")
-    public BaseResponse<List<MerchantVo>> listBusinessByOrderTypeId(@PathVariable(value = "orderTypeId") Integer OrderTypeId) {
+    public BaseResponse<List<MerchantVo>> listMerchantByOrderTypeId(@PathVariable(value = "orderTypeId") Integer OrderTypeId) {
         if (OrderTypeId == null) {
             throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
@@ -35,7 +35,7 @@ public class MerchantController {
     }
 
     @GetMapping("/businesses/{businessId}")
-    public BaseResponse<MerchantVo> getBusinessById(@PathVariable(value = "businessId") Integer businessId) {
+    public BaseResponse<MerchantVo> getMerchantById(@PathVariable(value = "businessId") Integer businessId) {
         if (businessId == null) {
             throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }

@@ -7,7 +7,7 @@ import com.elm.model.vo.MerchantVo;
 public interface MerchantService {
     public List<MerchantVo> listMerchantByOrderTypeId(Integer orderTypeId);
 
-    public MerchantVo getMerchantById(Integer businessId);
+    public MerchantVo getMerchantById(Integer merchantId);
 
     public List<MerchantVo> listMerchantByMerchantName(String merchantName);
 

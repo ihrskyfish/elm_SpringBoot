@@ -63,17 +63,17 @@ public class OrdersController {
     }
 
     @PostMapping("/newOrders")
-    public BaseResponse<Integer> createOrders(@RequestParam("businessId") Integer businessId,
+    public BaseResponse<Integer> createOrders(@RequestParam("merchantId") Integer merchantId,
                                               @RequestParam("daId") Integer daId,
                                               @RequestParam("orderTotal") Double orderTotal) {
         String userId = userSupport.getCurrentUserId();
-        if (userId == null || businessId == null || daId == null || orderTotal == null) {
+        if (userId == null || merchantId == null || daId == null || orderTotal == null) {
             throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         if (orderTotal < 0) {
             throw new MerchantException(ErrorCode.PARAMS_ERROR, "订单总支付价格不能小于零");
         }
-        Integer result = ordersService.createOrders(userId, businessId, daId, orderTotal);
+        Integer result = ordersService.createOrders(userId, merchantId, daId, orderTotal);
         if (result!=null) {
             return ResultUtils.success(result);
         } else {

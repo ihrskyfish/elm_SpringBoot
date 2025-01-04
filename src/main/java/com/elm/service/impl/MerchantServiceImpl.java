@@ -31,9 +31,9 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public MerchantVo getMerchantById(Integer businessId) {
+    public MerchantVo getMerchantById(Integer merchantId) {
         try {
-            Merchant merchant = merchantMapper.getMerchantById(businessId);
+            Merchant merchant = merchantMapper.getMerchantById(merchantId);
             return getMerchantVo(merchant);
         } catch (SQLException e) {
             throw new RuntimeException(e);
