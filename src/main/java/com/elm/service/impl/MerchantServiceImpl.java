@@ -24,7 +24,7 @@ public class MerchantServiceImpl implements MerchantService {
     public List<MerchantVo> listMerchantByOrderTypeId(Integer orderTypeId) {
         try {
             List<Merchant> merchantList = merchantMapper.listMerchantByOrderTypeId(orderTypeId);
-            return getBusinessVo(merchantList);
+            return getMerchantVo(merchantList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -34,24 +34,24 @@ public class MerchantServiceImpl implements MerchantService {
     public MerchantVo getMerchantById(Integer businessId) {
         try {
             Merchant merchant = merchantMapper.getMerchantById(businessId);
-            return getBusinessVo(merchant);
+            return getMerchantVo(merchant);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public List<MerchantVo> listMerchantByMerchantName(String businessName) {
+    public List<MerchantVo> listMerchantByMerchantName(String merchantName) {
         try {
-            List<Merchant> merchantList = merchantMapper.listMerchantByMerchantName(businessName);
-            return getBusinessVo(merchantList);
+            List<Merchant> merchantList = merchantMapper.listMerchantByMerchantName(merchantName);
+            return getMerchantVo(merchantList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
 
-    public MerchantVo getBusinessVo(Merchant merchant) {
+    public MerchantVo getMerchantVo(Merchant merchant) {
         if (merchant == null) {
             return null;
         }
@@ -63,16 +63,16 @@ public class MerchantServiceImpl implements MerchantService {
     public List<MerchantVo> listMerchant() {
         try {
             List<Merchant> merchantList = merchantMapper.listMerchant();
-            return getBusinessVo(merchantList);
+            return getMerchantVo(merchantList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<MerchantVo> getBusinessVo(List<Merchant> merchantList) {
+    public List<MerchantVo> getMerchantVo(List<Merchant> merchantList) {
         if (CollectionUtils.isEmpty(merchantList)) {
             return new ArrayList<>();
         }
-        return merchantList.stream().map(this::getBusinessVo).collect(Collectors.toList());
+        return merchantList.stream().map(this::getMerchantVo).collect(Collectors.toList());
     }
 }

@@ -5,5 +5,5 @@ import java.util.List;
 import com.elm.model.vo.FoodVo;
 
 public interface FoodService {
-    public List<FoodVo> listFoodByMerchantId(Integer businessId);
+    public List<FoodVo> listFoodByMerchantId(Integer merchantId);
 }

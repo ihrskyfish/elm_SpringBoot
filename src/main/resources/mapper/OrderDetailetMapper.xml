@@ -5,7 +5,7 @@
     <insert id="saveOrderDetailetBatch" parameterType="java.util.List">
         <choose>
             <when test="list != null and list.size() > 0">
-                insert into orderDetailet(orderId,foodId,businessId,quantity) values
+                insert into orderDetailet(orderId,foodId,merchantId,quantity) values
                 <foreach collection="list" item="od" separator=",">
                     (#{od.orderId},#{od.foodId},#{od.merchantId},#{od.quantity})
                 </foreach>

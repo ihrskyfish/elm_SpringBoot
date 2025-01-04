@@ -21,9 +21,9 @@ public class FoodServiceImpl implements FoodService {
     private FoodMapper foodMapper;
 
     @Override
-    public List<FoodVo> listFoodByMerchantId(Integer businessId) {
+    public List<FoodVo> listFoodByMerchantId(Integer merchantId) {
         try {
-            List<Food> foodList = foodMapper.listFoodByMerchantId(businessId);
+            List<Food> foodList = foodMapper.listFoodByMerchantId(merchantId);
             return getFoodVo(foodList);
         } catch (SQLException e) {
             throw new RuntimeException(e);

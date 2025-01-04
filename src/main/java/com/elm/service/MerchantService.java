@@ -9,7 +9,7 @@ public interface MerchantService {
 
     public MerchantVo getMerchantById(Integer businessId);
 
-    public List<MerchantVo> listMerchantByMerchantName(String businessName);
+    public List<MerchantVo> listMerchantByMerchantName(String merchantName);
 
     public List<MerchantVo> listMerchant();
 }
