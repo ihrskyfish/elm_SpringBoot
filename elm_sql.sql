@@ -122,6 +122,11 @@ CREATE TABLE `point` (
   `balance` int NOT NULL COMMENT '钱包余额',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb3;
+alter table point
+    add constraint point_user_userId_fk
+        foreign key (userId) references user (userId);
+
+
 
 -- ----------------------------
 -- Table structure for pointTurnover
