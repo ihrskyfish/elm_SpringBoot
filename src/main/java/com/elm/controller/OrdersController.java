@@ -9,7 +9,7 @@ import com.elm.common.UserSupport;
 import com.elm.model.bo.OrderDetailet;
 import com.elm.model.vo.OrdersVo;
 import com.elm.service.OrdersService;
-import com.elm.exception.BusinessException;
+import com.elm.exception.MerchantException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,13 +23,13 @@ public class OrdersController {
     @GetMapping("/{orderId}")
     public BaseResponse<OrdersVo> getOrdersById(@PathVariable(value = "orderId") Integer orderId) {
         if (orderId == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         OrdersVo ordersVo = ordersService.getOrdersById(orderId);
         if (ordersVo != null) {
             return ResultUtils.success(ordersVo);
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取订单失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取订单失败");
         }
     }
 
@@ -37,7 +37,7 @@ public class OrdersController {
     public BaseResponse<List<OrdersVo>> listOrdersByUserId(@RequestParam("page") int page, @RequestParam("size") int size) {
         String userId = userSupport.getCurrentUserId();
         if (userId == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         List<OrdersVo> ordersVoList = ordersService.listOrdersByUserId(userId, page, size);
         System.out.println(page+"s"+size);
@@ -45,20 +45,20 @@ public class OrdersController {
         if (ordersVoList != null) {
             return ResultUtils.success(ordersVoList);
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取用户订单列表失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取用户订单列表失败");
         }
     }
 
     @GetMapping("/listsDetailet")
     public BaseResponse<List<OrderDetailet>> listOrderDetailetByOrderId(@RequestParam("orderId") Integer orderId) {
         if (orderId == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         List<OrderDetailet> ordersDList = ordersService.listOrderDetailetByOrderId(orderId);
         if (ordersDList != null) {
             return ResultUtils.success(ordersDList);
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取用户订单列表失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取用户订单列表失败");
         }
     }
 
@@ -68,45 +68,45 @@ public class OrdersController {
                                               @RequestParam("orderTotal") Double orderTotal) {
         String userId = userSupport.getCurrentUserId();
         if (userId == null || businessId == null || daId == null || orderTotal == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         if (orderTotal < 0) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "订单总支付价格不能小于零");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "订单总支付价格不能小于零");
         }
         Integer result = ordersService.createOrders(userId, businessId, daId, orderTotal);
         if (result!=null) {
             return ResultUtils.success(result);
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，新增订单失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，新增订单失败");
         }
     }
 
     @PostMapping("/newStates")
     public BaseResponse<Integer> updateOrder(@RequestParam("orderId") Integer orderId, @RequestParam("orderState") Integer orderState) {
         if (orderId == null || orderState == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         Integer result = ordersService.updateOrder(orderId, orderState);
         if (result.equals(1)) {
             return ResultUtils.success(result);
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新订单支付状态失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新订单支付状态失败");
         }
     }
 
     @PostMapping("/newTotals")
     public BaseResponse<Integer> updateOrders(@RequestParam("orderId") Integer orderId, @RequestParam("orderTotal") Double orderTotal) {
         if (orderId == null || orderTotal == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         if (orderTotal < 0) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "订单总支付价格不能小于零");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "订单总支付价格不能小于零");
         }
         Integer result = ordersService.updateOrders(orderId, orderTotal);
         if (result.equals(1)) {
             return ResultUtils.success(result);
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新订单支付价格（因为更新了积分使用）失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新订单支付价格（因为更新了积分使用）失败");
         }
     }
 }

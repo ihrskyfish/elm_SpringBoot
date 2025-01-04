@@ -10,8 +10,8 @@
         <result column="quantity" property="quantity"/>
         <association property="food" javaType="Food"
                      select="com.elm.mapper.FoodMapper.getFoodById" column="foodId"/>
-        <association property="business" javaType="Business"
-                     select="com.elm.mapper.BusinessMapper.getBusinessById"
+        <association property="merchant" javaType="Business"
+                     select="com.elm.mapper.MerchantMapper.getBusinessById"
                      column="businessId"/>
 
     </resultMap>

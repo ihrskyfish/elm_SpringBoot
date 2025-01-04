@@ -6,7 +6,7 @@ import com.elm.mapper.UserMapper;
 import com.elm.model.bo.User;
 import com.elm.model.vo.UserVo;
 import com.elm.service.UserService;
-import com.elm.exception.BusinessException;
+import com.elm.exception.MerchantException;
 import com.elm.util.JWTUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
         try {
             User user1 = userMapper.getUserByIdByPass(userId, password);
             if (user1 == null) {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "数据库操作失败，用户登录失败");
+                throw new MerchantException(ErrorCode.PARAMS_ERROR, "数据库操作失败，用户登录失败");
             }
 
             //获取Token

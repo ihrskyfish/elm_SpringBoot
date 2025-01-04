@@ -5,7 +5,7 @@ import com.elm.mapper.PointMapper;
 import com.elm.mapper.PointTurnoverMapper;
 import com.elm.model.vo.PointTurnoverVo;
 import com.elm.service.PointService;
-import com.elm.exception.BusinessException;
+import com.elm.exception.MerchantException;
 import com.elm.model.bo.Point;
 import com.elm.model.bo.PointTurnover;
 import com.elm.util.DateUtil;
@@ -49,7 +49,7 @@ public class PointServiceImpl implements PointService {
                 try {
                     int result = pointTurnoverMapper.updateState(pointTurnover.getId(), pointTurnover.getPointId(), pointTurnover.getUserId(), "C");
                     if (result != 1) {
-                        throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分明细状态失败");
+                        throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分明细状态失败");
                     }
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -72,7 +72,7 @@ public class PointServiceImpl implements PointService {
         try {
             Point point = this.getPoint(userId);
             if (point == null) {
-                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，查询用户积分账户失败");
+                throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，查询用户积分账户失败");
             }
             return pointTurnoverMapper.getUsefulPointTurnover(point.getId(), userId);
         } catch (SQLException e) {
@@ -118,10 +118,10 @@ public class PointServiceImpl implements PointService {
                     int result1 = pointTurnoverMapper.updateBalance(pointTurnover.getId(), pointTurnover.getPointId(), pointTurnover.getUserId(), lastPoint);
                     int result2 = pointTurnoverMapper.updateState(pointTurnover.getId(), pointTurnover.getPointId(), pointTurnover.getUserId(), "A2");
                     if (result1 != 1) {
-                        throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分Balance失败");
+                        throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分Balance失败");
                     }
                     if (result2 != 1) {
-                        throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分state失败");
+                        throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分state失败");
                     }
                     break;
                 } else if (canUsePoint == remainingAmount) {
@@ -129,10 +129,10 @@ public class PointServiceImpl implements PointService {
                     int result1 = pointTurnoverMapper.updateBalance(pointTurnover.getId(), pointTurnover.getPointId(), pointTurnover.getUserId(), 0);
                     int result2 = pointTurnoverMapper.updateState(pointTurnover.getId(), pointTurnover.getPointId(), pointTurnover.getUserId(), "B");
                     if (result1 != 1) {
-                        throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分Balance失败");
+                        throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分Balance失败");
                     }
                     if (result2 != 1) {
-                        throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分state失败");
+                        throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分state失败");
                     }
                     iterator.remove();
                     break;
@@ -141,16 +141,16 @@ public class PointServiceImpl implements PointService {
                     int result1 = pointTurnoverMapper.updateBalance(pointTurnover.getId(), pointTurnover.getPointId(), pointTurnover.getUserId(), 0);
                     int result2 = pointTurnoverMapper.updateState(pointTurnover.getId(), pointTurnover.getPointId(), pointTurnover.getUserId(), "B");
                     if (result1 != 1) {
-                        throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分Balance失败");
+                        throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分Balance失败");
                     }
                     if (result2 != 1) {
-                        throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分state失败");
+                        throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新积分state失败");
                     }
                     iterator.remove();
                 }
             }
             if (remainingAmount > 0) {
-                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "操作失败，当前积分不够使用");
+                throw new MerchantException(ErrorCode.SYSTEM_ERROR, "操作失败，当前积分不够使用");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -180,7 +180,7 @@ public class PointServiceImpl implements PointService {
         try {
             Point point = this.getPoint(userId);
             if (point == null) {
-                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，查询用户积分账户失败");
+                throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，查询用户积分账户失败");
             }
             List<PointTurnover> pointTurnoverList = pointTurnoverMapper.getPointTurnover(point.getId(), userId);
             return getPointTurnoverVo(pointTurnoverList);
@@ -194,7 +194,7 @@ public class PointServiceImpl implements PointService {
         try {
             Point point = this.getPoint(userId);
             if (point == null) {
-                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，查询用户积分账户失败");
+                throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，查询用户积分账户失败");
             }
             return pointTurnoverMapper.savePointTurnover(point.getId(), userId, "A1", amount, DateUtil.getTodayString());
         } catch (SQLException e) {

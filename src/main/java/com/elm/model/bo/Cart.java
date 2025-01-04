@@ -15,5 +15,5 @@ public class Cart {
     //多对一：所属食品
     private Food food;
     //多对一：所属商家
-    private Business business;
+    private Merchant merchant;
 }

@@ -13,5 +13,5 @@ public class CartVo {
     //多对一：所属食品
     private FoodVo foodVo;
     //多对一：所属商家
-    private BusinessVo businessVo;
+    private MerchantVo merchantVo;
 }

@@ -11,8 +11,8 @@
         <result column="orderTotal" property="orderTotal"/>
         <result column="daId" property="daId"/>
         <result column="orderState" property="orderState"/>
-        <association property="business" javaType="Business"
-                     select="com.elm.mapper.BusinessMapper.getBusinessById"
+        <association property="merchant" javaType="Business"
+                     select="com.elm.mapper.MerchantMapper.getBusinessById"
                      column="businessId"/>
         <collection property="list" ofType="OrderDetailet"
                     select="com.elm.mapper.OrderDetailetMapper.listOrderDetailetByOrderId"

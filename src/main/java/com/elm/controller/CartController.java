@@ -1,6 +1,5 @@
 package com.elm.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.elm.common.BaseResponse;
@@ -9,7 +8,7 @@ import com.elm.common.ResultUtils;
 import com.elm.common.UserSupport;
 import com.elm.model.vo.CartVo;
 import com.elm.service.CartService;
-import com.elm.exception.BusinessException;
+import com.elm.exception.MerchantException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class CartController {
         if (cartVoList != null) {
             return ResultUtils.success(cartVoList);
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取购物车列表失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取购物车列表失败");
         }
     }
 
@@ -41,7 +40,7 @@ public class CartController {
     public BaseResponse<CartVo> saveCart(@RequestParam("businessId") Integer businessId,
                                           @RequestParam("foodId") Integer foodId) {
         if (businessId == null || foodId == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         String userId = userSupport.getCurrentUserId();
         // 记录日志
@@ -50,7 +49,7 @@ public class CartController {
         if (result.equals(1)) {
             return ResultUtils.success(cartService.getCartVoByID(businessId, foodId, userId));
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，新增购物车失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，新增购物车失败");
         }
     }
 
@@ -60,16 +59,16 @@ public class CartController {
                                             @RequestParam("quantity") Integer quantity) {
         String userId = userSupport.getCurrentUserId();
         if (businessId == null || foodId == null || userId == null || quantity == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         if (quantity <= 0) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "商品数量不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "商品数量不可为空");
         }
         Integer result = cartService.updateCart(businessId, foodId, userId, quantity);
         if (result.equals(1)) {
             return ResultUtils.success(result);
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新购物车失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，更新购物车失败");
         }
     }
 
@@ -79,13 +78,13 @@ public class CartController {
                                             @RequestParam("foodId") Integer foodId) {
         String userId = userSupport.getCurrentUserId();
         if (userId == null || businessId == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
+            throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
         Integer result = cartService.removeCart(userId, businessId, foodId);
         if (result.equals(1)) {
             return ResultUtils.success(result);
         } else {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，移除购物车失败");
+            throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，移除购物车失败");
         }
     }
 }

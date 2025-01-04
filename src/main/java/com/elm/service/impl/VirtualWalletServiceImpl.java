@@ -8,7 +8,7 @@ import com.elm.model.bo.VirtualWallet;
 import com.elm.model.vo.TransactionFlowVo;
 import com.elm.model.vo.VirtualWalletVo;
 import com.elm.service.VirtualWalletService;
-import com.elm.exception.BusinessException;
+import com.elm.exception.MerchantException;
 import com.elm.util.DateUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class VirtualWalletServiceImpl implements VirtualWalletService {
         //先获取余额
         VirtualWalletVo virtualWalletVo = this.getWallet(userId);
         if (virtualWalletVo == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "当前用户" + userId + " 的虚拟钱包不存在");
+            throw new MerchantException(ErrorCode.NOT_FOUND_ERROR, "当前用户" + userId + " 的虚拟钱包不存在");
         }
         //再更新余额
         Integer balance = virtualWalletVo.getBalance() + amount;
@@ -69,7 +69,7 @@ public class VirtualWalletServiceImpl implements VirtualWalletService {
         //先获取余额
         VirtualWalletVo virtualWalletVo = this.getWallet(userId);
         if (virtualWalletVo == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "当前用户" + userId + " 的虚拟钱包不存在");
+            throw new MerchantException(ErrorCode.NOT_FOUND_ERROR, "当前用户" + userId + " 的虚拟钱包不存在");
         }
         //再更新余额
         Integer balance = virtualWalletVo.getBalance() - amount;
@@ -96,7 +96,7 @@ public class VirtualWalletServiceImpl implements VirtualWalletService {
         //先获取余额
         VirtualWalletVo virtualWalletVo = this.getWallet(userId);
         if (virtualWalletVo == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "当前用户" + userId + " 的虚拟钱包不存在");
+            throw new MerchantException(ErrorCode.NOT_FOUND_ERROR, "当前用户" + userId + " 的虚拟钱包不存在");
         }
         //再更新余额
         Integer balance = virtualWalletVo.getBalance() - amount;
@@ -111,7 +111,7 @@ public class VirtualWalletServiceImpl implements VirtualWalletService {
     public List<TransactionFlowVo> getLog(String userId) {
         VirtualWalletVo virtualWalletVo = this.getWallet(userId);
         if (virtualWalletVo == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "当前用户" + userId + " 的虚拟钱包不存在");
+            throw new MerchantException(ErrorCode.NOT_FOUND_ERROR, "当前用户" + userId + " 的虚拟钱包不存在");
         }
         try {
             List<TransactionFlow> transactionFlowList = transactionFlowMapper.getTransactionFlow(userId, virtualWalletVo.getId());
