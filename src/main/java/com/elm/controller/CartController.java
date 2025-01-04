@@ -25,10 +25,10 @@ public class CartController {
 
     @GetMapping("/lists")
     public BaseResponse<List<CartVo>> listCart(
-                                               @RequestParam("businessId") Integer businessId) {
+                                               @RequestParam("merchantId") Integer merchantId) {
 
         String userId = userSupport.getCurrentUserId();
-        List<CartVo> cartVoList = cartService.listCart(userId, businessId);
+        List<CartVo> cartVoList = cartService.listCart(userId, merchantId);
         if (cartVoList != null) {
             return ResultUtils.success(cartVoList);
         } else {

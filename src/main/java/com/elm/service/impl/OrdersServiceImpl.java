@@ -42,7 +42,7 @@ public class OrdersServiceImpl implements OrdersService {
 
         Orders orders = new Orders();
         orders.setUserId(userId);
-        orders.setBusinessId(businessId);
+        orders.setMerchantId(businessId);
         orders.setOrderDate(orderDate);
         orders.setOrderTotal(orderTotal);
         orders.setDaId(daId);
@@ -61,7 +61,7 @@ public class OrdersServiceImpl implements OrdersService {
             OrderDetailet od = new OrderDetailet();
             od.setOrderId(orderId);
             od.setFoodId(c.getFoodId());
-            od.setBusinessId(c.getBusinessId());
+            od.setMerchantId(c.getBusinessId());
             od.setQuantity(c.getQuantity());
             orderDetailetList.add(od);
         }

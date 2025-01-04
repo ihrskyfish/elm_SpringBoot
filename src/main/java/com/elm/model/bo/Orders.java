@@ -10,7 +10,7 @@ public class Orders {
     @TableId
     private Integer orderId;
     private String userId;
-    private Integer businessId;
+    private Integer merchantId;
     private String orderDate;
     private Double orderTotal;
     private Integer daId; //送货地址编号

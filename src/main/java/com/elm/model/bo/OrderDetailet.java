@@ -10,7 +10,7 @@ public class OrderDetailet {
     private Integer orderId;
     private Integer foodId;
     private Integer quantity;
-    private Integer businessId;
+    private Integer merchantId;
 
     //多对一：所属食品
     private Food food;

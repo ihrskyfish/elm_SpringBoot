@@ -11,7 +11,7 @@ public class Food {
     private String foodExplain;
     private String foodImg;
     private Double foodPrice;
-    private Integer businessId;
+    private Integer merchantId;
     private String remarks;
 
     @Override
@@ -20,6 +20,6 @@ public class Food {
                 "\n食品名称：" + this.foodName +
                 "\n食品介绍：" + this.foodExplain +
                 "\n食品价格：" + this.foodPrice +
-                "\n所属商家：" + this.businessId;
+                "\n所属商家：" + this.merchantId;
     }
 }
