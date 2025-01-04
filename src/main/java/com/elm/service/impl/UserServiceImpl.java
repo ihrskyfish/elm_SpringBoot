@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
             if (user1 == null) {
                 throw new MerchantException(ErrorCode.PARAMS_ERROR, "数据库操作失败，用户登录失败");
             }
-
+//#
             //获取Token
             Map<String, String> claim = new HashMap<String, String>();
             claim.put("userId", userId);

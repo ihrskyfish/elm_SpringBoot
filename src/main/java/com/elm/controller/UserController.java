@@ -64,6 +64,7 @@ public class UserController {
         }
     }
 
+//    # user support ,use spring context to get para
     @GetMapping("/info")
     public BaseResponse<User> getUserInfo() {
         String userId = userSupport.getCurrentUserId();
