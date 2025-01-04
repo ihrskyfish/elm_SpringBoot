@@ -18,15 +18,15 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for business
+-- Table structure for merchant
 -- ----------------------------
-DROP TABLE IF EXISTS `business`;
-CREATE TABLE `business` (
-  `businessId` int unsigned NOT NULL AUTO_INCREMENT COMMENT '商家编号',
-  `businessName` varchar(40) NOT NULL COMMENT '商家名称',
-  `businessAddress` varchar(50) DEFAULT NULL COMMENT '商家地址',
-  `businessExplain` varchar(40) DEFAULT NULL COMMENT '商家介绍',
-  `businessImg` mediumtext NOT NULL COMMENT '商家图片（base64）',
+DROP TABLE IF EXISTS `merchant`;
+CREATE TABLE `merchant` (
+  `merchantId` int unsigned NOT NULL AUTO_INCREMENT COMMENT '商家编号',
+  `merchantName` varchar(40) NOT NULL COMMENT '商家名称',
+  `merchantAddress` varchar(50) DEFAULT NULL COMMENT '商家地址',
+  `merchantExplain` varchar(40) DEFAULT NULL COMMENT '商家介绍',
+  `merchantImg` mediumtext NOT NULL COMMENT '商家图片（base64）',
   `orderTypeId` int NOT NULL COMMENT '点餐分类',
   `starPrice` decimal(5,2) DEFAULT '0.00' COMMENT '起送费',
   `deliveryPrice` decimal(5,2) DEFAULT '0.00' COMMENT '配送费',
@@ -34,7 +34,7 @@ CREATE TABLE `business` (
   `views` int(10) unsigned zerofill DEFAULT NULL,
   `orderQuantity` int DEFAULT NULL,
   `isDelete` tinyint NOT NULL DEFAULT '0' COMMENT '是否删除',
-  PRIMARY KEY (`businessId`)
+  PRIMARY KEY (`merchantId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10014 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `cartId` int NOT NULL AUTO_INCREMENT COMMENT '无意义编号',
   `foodId` int NOT NULL COMMENT '食品编号',
-  `businessId` int NOT NULL COMMENT '所属商家编号',
+  `merchantId` int NOT NULL COMMENT '所属商家编号',
   `userId` varchar(20) NOT NULL COMMENT '所属用户编号',
   `quantity` int NOT NULL COMMENT '同一类型食品的购买数量',
   `isDelete` tinyint NOT NULL DEFAULT '0' COMMENT '是否删除',
@@ -76,7 +76,7 @@ CREATE TABLE `food` (
   `foodExplain` varchar(30) NOT NULL COMMENT '食品介绍',
   `foodImg` mediumtext NOT NULL COMMENT '食品图片',
   `foodPrice` decimal(5,2) NOT NULL COMMENT '食品价格',
-  `businessId` int NOT NULL COMMENT '所属商家编号',
+  `merchantId` int NOT NULL COMMENT '所属商家编号',
   `remarks` varchar(40) DEFAULT NULL COMMENT '备注',
   `isDelete` tinyint NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`foodId`)
@@ -92,7 +92,7 @@ CREATE TABLE `orderdetailet` (
   `foodId` int NOT NULL COMMENT '食品编号',
   `quantity` int NOT NULL COMMENT '数量',
   `isDelete` tinyint NOT NULL DEFAULT '0' COMMENT '是否删除',
-  `businessId` int DEFAULT NULL,
+  `merchantId` int DEFAULT NULL,
   PRIMARY KEY (`odId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb3;
 
@@ -103,7 +103,7 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `orderId` int NOT NULL AUTO_INCREMENT COMMENT '订单编号',
   `userId` varchar(20) NOT NULL COMMENT '用户编号',
-  `businessId` int NOT NULL COMMENT '商家编号',
+  `merchantId` int NOT NULL COMMENT '商家编号',
   `orderDate` varchar(20) NOT NULL COMMENT '订购日期',
   `orderTotal` decimal(7,2) NOT NULL DEFAULT '0.00' COMMENT '订单总价',
   `daId` int NOT NULL COMMENT '送货地址编号',
