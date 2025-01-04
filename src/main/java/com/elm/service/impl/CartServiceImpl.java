@@ -71,9 +71,9 @@ public class CartServiceImpl implements CartService {
         return cartList.stream().map(this::getCartVo).collect(Collectors.toList());
     }
 
-    public CartVo getCartVoByID(Integer foodId, Integer businessId, String userId) {
+    public CartVo getCartVoByID(Integer foodId, Integer merchantId, String userId) {
         try {
-            Cart cart = cartMapper.getCartById(businessId,foodId,userId);
+            Cart cart = cartMapper.getCartById(merchantId,foodId,userId);
             return getCartVo(cart);
         }catch (SQLException e) {
             throw new RuntimeException(e);
