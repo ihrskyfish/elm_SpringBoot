@@ -6,14 +6,14 @@
     <resultMap type="Orders" id="ordersResultMap">
         <id column="orderId" property="orderId"/>
         <result column="userId" property="userId"/>
-        <result column="businessId" property="businessId"/>
+        <result column="merchantId" property="merchantId"/>
         <result column="orderDate" property="orderDate"/>
         <result column="orderTotal" property="orderTotal"/>
         <result column="daId" property="daId"/>
         <result column="orderState" property="orderState"/>
-        <association property="merchant" javaType="Business"
-                     select="com.elm.mapper.MerchantMapper.getBusinessById"
-                     column="businessId"/>
+        <association property="merchant" javaType="Merchant"
+                     select="com.elm.mapper.MerchantMapper.getMerchantById"
+                     column="merchantId"/>
         <collection property="list" ofType="OrderDetailet"
                     select="com.elm.mapper.OrderDetailetMapper.listOrderDetailetByOrderId"
                     column="orderId"/>
