@@ -21,7 +21,7 @@ public class FoodServiceImpl implements FoodService {
     private FoodMapper foodMapper;
 
     @Override
-    public List<FoodVo> listFoodByBusinessId(Integer businessId) {
+    public List<FoodVo> listFoodByMerchantId(Integer businessId) {
         try {
             List<Food> foodList = foodMapper.listFoodByMerchantId(businessId);
             return getFoodVo(foodList);

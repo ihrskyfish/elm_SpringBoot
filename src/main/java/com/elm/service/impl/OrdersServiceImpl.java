@@ -32,17 +32,17 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     @Transactional
-    public int createOrders(String userId, Integer businessId, Integer daId, Double orderTotal) {
+    public int createOrders(String userId, Integer merchantId, Integer daId, Double orderTotal) {
         //1、查询当前用户购物车中当前商家的所有食品
         Cart cart = new Cart();
         cart.setUserId(userId);
-        cart.setMerchantId(businessId);
+        cart.setMerchantId(merchantId);
         List<Cart> cartList = cartMapper.listCart( cart.getUserId(), cart.getMerchantId());
         String orderDate = DateUtil.getTodayString();
 
         Orders orders = new Orders();
         orders.setUserId(userId);
-        orders.setMerchantId(businessId);
+        orders.setMerchantId(merchantId);
         orders.setOrderDate(orderDate);
         orders.setOrderTotal(orderTotal);
         orders.setDaId(daId);

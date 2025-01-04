@@ -21,9 +21,9 @@ public class MerchantServiceImpl implements MerchantService {
     private MerchantMapper merchantMapper;
 
     @Override
-    public List<MerchantVo> listBusinessByOrderTypeId(Integer orderTypeId) {
+    public List<MerchantVo> listMerchantByOrderTypeId(Integer orderTypeId) {
         try {
-            List<Merchant> merchantList = merchantMapper.listBusinessByOrderTypeId(orderTypeId);
+            List<Merchant> merchantList = merchantMapper.listMerchantByOrderTypeId(orderTypeId);
             return getBusinessVo(merchantList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -31,9 +31,9 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public MerchantVo getBusinessById(Integer businessId) {
+    public MerchantVo getMerchantById(Integer businessId) {
         try {
-            Merchant merchant = merchantMapper.getBusinessById(businessId);
+            Merchant merchant = merchantMapper.getMerchantById(businessId);
             return getBusinessVo(merchant);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -41,9 +41,9 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public List<MerchantVo> listBusinessByBusinessName(String businessName) {
+    public List<MerchantVo> listMerchantByMerchantName(String businessName) {
         try {
-            List<Merchant> merchantList = merchantMapper.listBusinessByBusinessName(businessName);
+            List<Merchant> merchantList = merchantMapper.listMerchantByMerchantName(businessName);
             return getBusinessVo(merchantList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -60,9 +60,9 @@ public class MerchantServiceImpl implements MerchantService {
         return merchantVo;
     }
 
-    public List<MerchantVo> listBusiness() {
+    public List<MerchantVo> listMerchant() {
         try {
-            List<Merchant> merchantList = merchantMapper.listBusiness();
+            List<Merchant> merchantList = merchantMapper.listMerchant();
             return getBusinessVo(merchantList);
         } catch (SQLException e) {
             throw new RuntimeException(e);

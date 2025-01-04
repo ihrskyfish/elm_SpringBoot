@@ -10,15 +10,15 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface MerchantMapper extends BaseMapper<Merchant> {
-    @Select("select * from business where orderTypeId=#{orderTypeId} order by businessId")
-    public List<Merchant> listBusinessByOrderTypeId(Integer orderTypeId) throws SQLException;
+    @Select("select * from merchant where orderTypeId=#{orderTypeId} order by merchantId")
+    public List<Merchant> listMerchantByOrderTypeId(Integer orderTypeId) throws SQLException;
 
-    @Select("select * from business where businessId=#{businessId}")
-    public Merchant getBusinessById(Integer businessId) throws SQLException;
+    @Select("select * from merchant where merchantId=#{merchantId}")
+    public Merchant getMerchantById(Integer merchantId) throws SQLException;
 
-    @Select("select * from business order by businessId")
-    public List<Merchant> listBusiness() throws SQLException;
+    @Select("select * from merchant order by merchantId")
+    public List<Merchant> listMerchant() throws SQLException;
 
-    @Select("SELECT * FROM business WHERE businessName LIKE CONCAT('%', #{businessName}, '%')")
-    List<Merchant> listBusinessByBusinessName(String businessName) throws SQLException;
+    @Select("SELECT * FROM merchant WHERE merchantName LIKE CONCAT('%', #{merchantName}, '%')")
+    List<Merchant> listMerchantByMerchantName(String merchantName) throws SQLException;
 }

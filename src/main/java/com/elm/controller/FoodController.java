@@ -26,7 +26,7 @@ public class FoodController {
         if (businessId == null) {
             throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
-        List<FoodVo> foodVoList = foodService.listFoodByBusinessId(businessId);
+        List<FoodVo> foodVoList = foodService.listFoodByMerchantId(businessId);
         if (foodVoList != null) {
             return ResultUtils.success(foodVoList);
         } else {

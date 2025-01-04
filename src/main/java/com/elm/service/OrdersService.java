@@ -6,7 +6,7 @@ import com.elm.model.bo.OrderDetailet;
 import com.elm.model.vo.OrdersVo;
 
 public interface OrdersService {
-    public int createOrders(String userId, Integer businessId, Integer daId, Double orderTotal);
+    public int createOrders(String userId, Integer merchantId, Integer daId, Double orderTotal);
 
     public OrdersVo getOrdersById(Integer orderId);
 
