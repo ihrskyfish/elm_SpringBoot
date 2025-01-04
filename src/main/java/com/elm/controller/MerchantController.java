@@ -35,11 +35,11 @@ public class MerchantController {
     }
 
     @GetMapping("/businesses/{businessId}")
-    public BaseResponse<MerchantVo> getMerchantById(@PathVariable(value = "businessId") Integer businessId) {
-        if (businessId == null) {
+    public BaseResponse<MerchantVo> getMerchantById(@PathVariable(value = "businessId") Integer merchantId) {
+        if (merchantId == null) {
             throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
-        MerchantVo merchantVo = merchantService.getMerchantById(businessId);
+        MerchantVo merchantVo = merchantService.getMerchantById(merchantId);
         if (merchantVo != null) {
             return ResultUtils.success(merchantVo);
         } else {
@@ -48,7 +48,7 @@ public class MerchantController {
     }
 
     @GetMapping("/businessLists")
-    public BaseResponse<List<MerchantVo>> listBusiness() {
+    public BaseResponse<List<MerchantVo>> listMerchant() {
         List<MerchantVo> merchantVoList = merchantService.listMerchant();
         if (merchantVoList != null) {
             return ResultUtils.success(merchantVoList);
@@ -57,9 +57,9 @@ public class MerchantController {
         }
     }
     @GetMapping("/businessNameLists/{businessName}")
-    public BaseResponse<List<MerchantVo>> listBusinessByBusinessName(@PathVariable(value = "businessName", required = false) String businessName) {
+    public BaseResponse<List<MerchantVo>> listBusinessByBusinessName(@PathVariable(value = "businessName", required = false) String merchantName) {
         // 此处传入的Name参数可以为空
-        List<MerchantVo> merchantVoList = merchantService.listMerchantByMerchantName(businessName);
+        List<MerchantVo> merchantVoList = merchantService.listMerchantByMerchantName(merchantName);
         if (merchantVoList != null) {
             return ResultUtils.success(merchantVoList);
         } else {

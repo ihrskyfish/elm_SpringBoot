@@ -27,28 +27,28 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public int saveCart(Integer businessId, String userId,Integer foodId) {
+    public int saveCart(Integer merchantId, String userId,Integer foodId) {
         try {
-            return cartMapper.saveCart(businessId, userId,foodId);
+            return cartMapper.saveCart(merchantId, userId,foodId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public int updateCart(Integer businessId, Integer foodId, String userId, Integer quantity) {
+    public int updateCart(Integer merchantId, Integer foodId, String userId, Integer quantity) {
         try {
-            return cartMapper.updateCart(businessId, foodId, userId, quantity);
+            return cartMapper.updateCart(merchantId, foodId, userId, quantity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public int removeCart(String userId, Integer businessId, Integer foodId) {
+    public int removeCart(String userId, Integer merchantId, Integer foodId) {
         try {
             // 最底层的 不用变
-            return cartMapper.removeCart(userId, businessId, foodId);
+            return cartMapper.removeCart(userId, merchantId, foodId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

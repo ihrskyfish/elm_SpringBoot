@@ -22,7 +22,7 @@ public class FoodController {
     private FoodService foodService;
 
     @GetMapping("/lists/{businessId}")
-    public BaseResponse<List<FoodVo>> listFoodByBusinessId(@PathVariable(value = "businessId") Integer merchantId) throws Exception {
+    public BaseResponse<List<FoodVo>> listFoodByMerchantId(@PathVariable(value = "businessId") Integer merchantId) throws Exception {
         if (merchantId == null) {
             throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
