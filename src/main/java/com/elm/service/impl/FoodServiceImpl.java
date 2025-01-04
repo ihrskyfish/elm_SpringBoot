@@ -23,7 +23,7 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public List<FoodVo> listFoodByBusinessId(Integer businessId) {
         try {
-            List<Food> foodList = foodMapper.listFoodByBusinessId(businessId);
+            List<Food> foodList = foodMapper.listFoodByMerchantId(businessId);
             return getFoodVo(foodList);
         } catch (SQLException e) {
             throw new RuntimeException(e);

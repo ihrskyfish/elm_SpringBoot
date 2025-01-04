@@ -11,13 +11,13 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface FoodMapper extends BaseMapper<Food> {
-    @Select("select * from food where businessId=#{businessId} order by foodId")
-    public List<Food> listFoodByBusinessId(Integer businessId) throws SQLException;
+    @Select("select * from food where merchantId=#{merchantId} order by foodId")
+    public List<Food> listFoodByMerchantId(Integer merchantId) throws SQLException;
 
     @Select("select * from food where foodId=#{foodId}")
     public Food getFoodById(Integer foodId) throws SQLException;
 
-    @Select("SELECT * FROM food WHERE foodId = #{foodId} AND businessId = #{businessId}")
-    Food getFoodByIdAndBusinessId(@Param("foodId") Integer foodId, @Param("businessId") Integer businessId);
+    @Select("SELECT * FROM food WHERE foodId = #{foodId} AND merchantId = #{merchantId}")
+    Food getFoodByIdAndMerchantId(@Param("foodId") Integer foodId, @Param("merchantId") Integer merchantId);
 
 }

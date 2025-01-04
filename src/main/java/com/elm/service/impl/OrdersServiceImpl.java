@@ -36,8 +36,8 @@ public class OrdersServiceImpl implements OrdersService {
         //1、查询当前用户购物车中当前商家的所有食品
         Cart cart = new Cart();
         cart.setUserId(userId);
-        cart.setBusinessId(businessId);
-        List<Cart> cartList = cartMapper.listCart( cart.getUserId(), cart.getBusinessId());
+        cart.setMerchantId(businessId);
+        List<Cart> cartList = cartMapper.listCart( cart.getUserId(), cart.getMerchantId());
         String orderDate = DateUtil.getTodayString();
 
         Orders orders = new Orders();
@@ -61,7 +61,7 @@ public class OrdersServiceImpl implements OrdersService {
             OrderDetailet od = new OrderDetailet();
             od.setOrderId(orderId);
             od.setFoodId(c.getFoodId());
-            od.setMerchantId(c.getBusinessId());
+            od.setMerchantId(c.getMerchantId());
             od.setQuantity(c.getQuantity());
             orderDetailetList.add(od);
         }
@@ -73,7 +73,7 @@ public class OrdersServiceImpl implements OrdersService {
 
         //4、从购物车表中删除相关食品信息
         try {
-            cartMapper.removeCart(cart.getUserId(), cart.getBusinessId(), cart.getFoodId());
+            cartMapper.removeCart(cart.getUserId(), cart.getMerchantId(), cart.getFoodId());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

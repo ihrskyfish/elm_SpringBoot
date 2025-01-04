@@ -8,7 +8,7 @@ public class Cart {
     @TableId
     private Integer cartId;
     private Integer foodId;
-    private Integer businessId;
+    private Integer merchantId;
     private String userId;
     private Integer quantity;
 
