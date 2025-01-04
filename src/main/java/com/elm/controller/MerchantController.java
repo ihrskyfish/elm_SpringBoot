@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/business")
+@RequestMapping("/merchant")
 public class MerchantController {
 
     @Autowired
@@ -34,8 +34,8 @@ public class MerchantController {
         }
     }
 
-    @GetMapping("/businesses/{businessId}")
-    public BaseResponse<MerchantVo> getMerchantById(@PathVariable(value = "businessId") Integer merchantId) {
+    @GetMapping("/merchantes/{merchantId}")
+    public BaseResponse<MerchantVo> getMerchantById(@PathVariable(value = "merchantId") Integer merchantId) {
         if (merchantId == null) {
             throw new MerchantException(ErrorCode.PARAMS_ERROR, "请求参数不可为空");
         }
@@ -47,7 +47,7 @@ public class MerchantController {
         }
     }
 
-    @GetMapping("/businessLists")
+    @GetMapping("/merchantLists")
     public BaseResponse<List<MerchantVo>> listMerchant() {
         List<MerchantVo> merchantVoList = merchantService.listMerchant();
         if (merchantVoList != null) {
@@ -56,8 +56,8 @@ public class MerchantController {
             throw new MerchantException(ErrorCode.SYSTEM_ERROR, "数据库操作失败，获取商家列表失败");
         }
     }
-    @GetMapping("/businessNameLists/{businessName}")
-    public BaseResponse<List<MerchantVo>> listBusinessByBusinessName(@PathVariable(value = "businessName", required = false) String merchantName) {
+    @GetMapping("/merchantNameLists/{merchantName}")
+    public BaseResponse<List<MerchantVo>> listmerchantBymerchantName(@PathVariable(value = "merchantName", required = false) String merchantName) {
         // 此处传入的Name参数可以为空
         List<MerchantVo> merchantVoList = merchantService.listMerchantByMerchantName(merchantName);
         if (merchantVoList != null) {

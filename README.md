@@ -21,7 +21,7 @@ elm_springboot是一个基于Spring Boot的Web应用程序，设计用于处理�
 
 ### 1. 业务逻辑层 (Service Layer)
 
-- **BusinessServiceImpl**: 处理与业务相关的逻辑。
+- **merchantServiceImpl**: 处理与业务相关的逻辑。
 - **CartServiceImpl**: 购物车功能的实现。
 - **DeliveryAddressServiceImpl**: 管理送货地址的逻辑。
 - **FoodServiceImpl**: 食品相关功能的实现。
@@ -32,7 +32,7 @@ elm_springboot是一个基于Spring Boot的Web应用程序，设计用于处理�
 
 ### 2. 控制器层 (Controller Layer)
 
-- **BusinessController**: 业务相关的Web接口。
+- **merchantController**: 业务相关的Web接口。
 - **CartController**: 购物车相关的Web接口。
 - **DeliveryAddressController**: 地址管理相关的Web接口。
 - **FoodController**: 食品相关的Web接口。
@@ -42,19 +42,19 @@ elm_springboot是一个基于Spring Boot的Web应用程序，设计用于处理�
 
 ### 3. 数据访问层 (Data Access Layer)
 
-- **Mapper接口**: 如 `BusinessMapper`, `CartMapper` 等，用于与数据库交互。
+- **Mapper接口**: 如 `merchantMapper`, `CartMapper` 等，用于与数据库交互。
 
 ### 4. 数据传输对象 (DTOs)
 
-- **VO类**: 如 `BusinessVo`, `CartVo` 等，用于在不同层之间传递数据。
+- **VO类**: 如 `merchantVo`, `CartVo` 等，用于在不同层之间传递数据。
 
 ### 5. 实体类 (Entities)
 
-- **实体类**: 如 `Business`, `Cart` 答等，映射数据库表。
+- **实体类**: 如 `merchant`, `Cart` 答等，映射数据库表。
 
 ### 6. 异常处理
 
-- **BusinessException**: 业务异常类。
+- **merchantException**: 业务异常类。
 - **ConditionException**: 条件异常处理。
 
 ### 7. 工具类 (Utilities)
