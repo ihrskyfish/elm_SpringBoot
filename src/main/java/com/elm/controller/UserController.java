@@ -72,6 +72,7 @@ public class UserController {
         return ResultUtils.success(user);
     }
 
+//    add a auto create virtual_wallet function
     @PostMapping("/register")
     public BaseResponse<Integer> saveUser(@RequestBody User user) {
         String userId = user.getUserId();
